@@ -1,0 +1,89 @@
+body {
+  min-height: 2000px;
+}
+
+section {
+  padding-top: 5rem;
+}
+
+@font-face {
+  font-family: "oswaldlight";
+  src: url(../fonts/oswald-light-webfont.woff) format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.jumbotron {
+  padding-top: 6rem;
+  background-color: #e2edff;
+}
+
+.garisbawah {
+  border-bottom: 3px solid #969696;
+  width: 50%;
+}
+
+.bawah {
+  border-bottom: 3px solid #969696;
+  width: 80%;
+}
+
+.profil {
+  text-align: justify;
+}
+
+.jurusan {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.tahun {
+  font-size: 1rem;
+  color: rgb(144, 144, 144);
+}
+
+.progress {
+  width: 90%;
+}
+
+#projects {
+  background-color: #e2edff;
+}
+
+.website a {
+  text-decoration: none;
+  color: #333;
+}
+
+.website a:hover {
+  text-decoration: none;
+  color: #0179b9;
+}
+
+.copyright {
+  color: #f7f7fc;
+  text-decoration: none;
+  font: 18px/20px "oswaldlight", "Arial Narrow", arial, sans-serif;
+}
+
+.copyright a {
+  color: white;
+  text-decoration: none;
+}
+
+.copyright a:hover {
+  color: #e2edff;
+  text-decoration: none;
+}
+
+@media (min-width: 992px) {
+  .garisver {
+    border-right: 1px grey solid;
+    height: 1550px;
+    width: 0px;
+  }
+
+  .pengalaman {
+    padding-left: 1.5em;
+  }
+}
