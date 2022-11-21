@@ -437,23 +437,33 @@
 
       <div class="row justify-content-center">
         <div class="col-md-6">
-          <form>
+          <div class="alert alert-success alert-dismissible fade show d-none" role="alert">
+            <strong>Berhasil!</strong> Pesan Anda sudah diterima.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+
+          <form name="pesan-portfolio5">
             <div class="mb-3">
-              <label for="name">Nama</label>
-              <input type="text" class="form-control" id="name" required />
+              <label for="name">Nama Lengkap</label>
+              <input type="text" class="form-control" id="name" name="nama" required />
             </div>
 
             <div class="mb-3">
-              <label for="email">Alamat Email</label>
-              <input type="email" class="form-control" id="email" aria-describedby="email" required />
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" name="email" aria-describedby="email" required />
             </div>
 
             <div class="mb-3">
               <label for="message">Pesan</label>
-              <textarea name="pesan" id="pesan" class="form-control" rows="3" required></textarea>
+              <textarea name="pesan" id="pesan" name="pesan" class="form-control" rows="3" required></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary">Kirim</button>
+            <button type="submit" class="btn btn-primary btn-kirim">Kirim</button>
+
+            <button class="btn btn-primary btn-loading d-none" type="button" disabled>
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              Proses...
+            </button>
           </form>
         </div>
       </div>
@@ -489,6 +499,37 @@
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
 
+  <form name="submit-to-google-sheet">
+    <input name="email" type="email" placeholder="Email" required>
+    <button type="submit">Send</button>
+  </form>
+
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycby0RlDuNIdhCBNcRTjwVRzWHrunPdjjZh5anMgzaZ1dXNOOUy0wVq7u787dENclnFzw/exec'
+    const form = document.forms['pesan-portfolio5']
+    const btnKirim = document.querySelector('.btn-kirim');
+    const btnLoading = document.querySelector('.btn-loading');
+    const myAlert = document.querySelector('.alert');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      // ketika tombol submit di klik  
+      // tampilkan tombol loading, hilangkan tombol kirim
+      btnLoading.classList.toggle('d-none');
+      btnKirim.classList.toggle('d-none');
+      fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+        .then(response => {
+          // tampilkan tombol Kirim, hilangkan tombol loading
+          btnLoading.classList.toggle('d-none');
+          btnKirim.classList.toggle('d-none');
+          // tampilkan alert
+          myAlert.classList.toggle('d-none');
+          form.reset();
+          console.log('Success!', response)
+        })
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
   <!-- Option 2: Separate Popper and Bootstrap JS -->
   <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
